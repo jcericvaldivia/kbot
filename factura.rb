@@ -10,12 +10,14 @@ class Factura
         total = @cantidad * @precioUnitario
         "#{total}"
     end 
+    def calculoImpuesto()
+        @cantidad * @precioUnitario * 0.0825
+    end
 
 
 end
 
 
 factura = Factura.new(ARGV[0],ARGV[1])
-
 
 puts "# #{ARGV[0]} * $#{ARGV[1]} = $" + factura.calculoTotal()
