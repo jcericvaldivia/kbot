@@ -33,4 +33,5 @@ factura = Factura.new(ARGV[0],ARGV[1])
 
 puts "# #{ARGV[0]} * $#{ARGV[1]} = $" + factura.calculoSubTotal()
 puts "CA(%8.25) = $"+factura.calculoImpuesto()
+puts "DTO(%0) = $"+factura.calculoDescuento()
 puts "Total = $"+factura.calculoTotal()
