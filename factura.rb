@@ -1,10 +1,11 @@
 
 class Factura
     
-    def initialize(cantidad , precioUnitario)
+    def initialize(cantidad , precioUnitario, estado)
 
        @cantidad = cantidad.to_i
        @precioUnitario =  precioUnitario.to_i
+       @estado = estado
     end
     def calculoSubTotal()
        @subTotal = @cantidad * @precioUnitario
@@ -29,7 +30,7 @@ class Factura
 end
 
 
-factura = Factura.new(ARGV[0],ARGV[1])
+factura = Factura.new(ARGV[0],ARGV[1], ARGV[2])
 
 puts "# #{ARGV[0]} * $#{ARGV[1]} = $" + factura.calculoSubTotal()
 puts "CA(%8.25) = $"+factura.calculoImpuesto()
