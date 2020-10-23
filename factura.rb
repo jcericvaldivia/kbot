@@ -6,12 +6,17 @@ class Factura
        @cantidad = cantidad.to_i
        @precioUnitario =  precioUnitario.to_i
     end
-    def calculoTotal()
-        total = @cantidad * @precioUnitario
-        "#{total}"
+    def calculoSubTotal()
+       @subTotal = @cantidad * @precioUnitario
+       "#{@subTotal}"
     end 
     def calculoImpuesto()
-        @cantidad * @precioUnitario * 0.0825
+     @impuesto = @cantidad * @precioUnitario * 0.0825
+     "#{@impuesto}"
+    end
+    def calculoTotal()
+      @total =  @subTotal+@impuesto
+      "#{@total}"
     end
 
 
@@ -20,4 +25,6 @@ end
 
 factura = Factura.new(ARGV[0],ARGV[1])
 
-puts "# #{ARGV[0]} * $#{ARGV[1]} = $" + factura.calculoTotal()
+puts "# #{ARGV[0]} * $#{ARGV[1]} = $" + factura.calculoSubTotal()
+puts "CA(%8.25) = $"+factura.calculoImpuesto()
+puts "Total = $"+factura.calculoTotal()
