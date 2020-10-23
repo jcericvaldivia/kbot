@@ -29,6 +29,42 @@ class MapaImpuestoEstado
 
 end
 
+class Descuento
+    def initialize()
+
+        
+        @rango1 = 0
+        @rango2 = 3
+        @rango3 = 5
+        @rango4 = 7
+        @rango5 = 10
+        @rango6 = 15
+        
+        
+     end
+
+     def getDescuento(montoSubTotal)
+        case montoSubTotal
+        when 0..1000
+            @rango1
+        when 1001..5000
+            @rango2
+        when 5001..7000
+            @rango3
+        when 7001..10000
+            @rango4
+        when 10001..50000
+            @rango5
+        else
+            @rango6
+        
+     end
+    end
+     
+
+
+end
+
 class Factura
     
     def initialize(cantidad , precioUnitario, estado)
@@ -45,6 +81,7 @@ class Factura
         @impuestoEstado = {"UT"=>  @mapImpuestoEstado.getUT(), "NV"=> @mapImpuestoEstado.getNV(), "TX"=> @mapImpuestoEstado.getTX(), "AL"=> @mapImpuestoEstado.getAL(), "CA"=> @mapImpuestoEstado.getCA()}[@estado]
         "#{@impuestoEstado}"
     end
+    
 
     def calculoImpuesto()     
      
@@ -52,9 +89,12 @@ class Factura
      
      "#{@impuesto}"
     end
-    
+    def obtenerDescuentoMonto()
+        objDescuento = Descuento.new()
+        @descuentoMonto= objDescuento.getDescuento(@subTotal + @impuesto)
+    end
     def calculoDescuento()
-        @descuento = (@subTotal + @impuesto) * 0
+        @descuento = (@subTotal + @impuesto) * ( @descuentoMonto*0.01)
         "#{@descuento}"
     end
 
@@ -71,6 +111,10 @@ class Factura
        
        "#{impuestoEstadoImpresion}"
     end
+    def getDescuentoMonto()
+        "#{@descuentoMonto}"   
+    end
+
 
     
 
@@ -82,6 +126,8 @@ end
 factura = Factura.new(ARGV[0],ARGV[1], ARGV[2])
 
 puts "# #{ARGV[0]} * $#{ARGV[1]} = $" + factura.calculoSubTotal()
+
 puts "#{factura.getEstado}(%#{factura.getImpuestoEstadoImpresion}) = $"+factura.calculoImpuesto()
-puts "DTO(%0) = $"+factura.calculoDescuento()
+factura.obtenerDescuentoMonto()
+puts "DTO(%#{factura.getDescuentoMonto}) = $"+factura.calculoDescuento()
 puts "Total = $"+factura.calculoTotal()
