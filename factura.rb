@@ -70,11 +70,11 @@ class Factura
     def initialize(cantidad , precioUnitario, estado)
        @mapImpuestoEstado = MapaImpuestoEstado.new()
        @cantidad = cantidad.to_i
-       @precioUnitario =  precioUnitario.to_i
+       @precioUnitario =  precioUnitario.to_f
        @estado = estado
     end
     def calculoSubTotal()
-       @subTotal = @cantidad * @precioUnitario
+       @subTotal = @cantidad * @precioUnitario.to_f
        "#{@subTotal}"
     end 
     def obtenerImpuestoEstado()
