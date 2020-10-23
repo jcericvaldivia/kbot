@@ -1,8 +1,38 @@
+class MapaImpuestoEstado
+    def initialize()
+
+        @UT = 0.0685
+        @NV = 0.08
+        @TX = 0.0625
+        @AL = 0.04
+        @CA = 0.0685
+        
+        
+     end
+
+     def getUT
+        "#{@UT}"
+     end
+     def getNV
+        "#{@NV}"
+     end
+     def getTX
+        "#{@TX}"
+     end
+     def getAL
+        "#{@AL}"
+     end
+     def getCA
+        "#{@CA}"
+     end
+
+
+end
 
 class Factura
     
     def initialize(cantidad , precioUnitario, estado)
-
+       @mapImpuestoEstado = MapaImpuestoEstado.new()
        @cantidad = cantidad.to_i
        @precioUnitario =  precioUnitario.to_i
        @estado = estado
@@ -12,6 +42,8 @@ class Factura
        "#{@subTotal}"
     end 
     def calculoImpuesto()
+        hola={"es"=> 'Hola', "en"=> 'Hello'}[@idioma]
+     @impuestoEstado = {"UT"=>  @mapImpuestoEstado.getUT, "NV"=> @mapImpuestoEstado.getNV, "TX"=> @mapImpuestoEstado.getTX, "AL"=> @mapImpuestoEstado.getAL, "CA"=> @mapImpuestoEstado.getCA}[@estado]   
      @impuesto = @cantidad * @precioUnitario * 0.0825
      "#{@impuesto}"
     end
@@ -28,6 +60,8 @@ class Factura
     def getEstado()
         "#{@estado}"
     end
+    
+
 
 
 end
