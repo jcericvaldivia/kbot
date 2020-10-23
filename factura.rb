@@ -102,6 +102,7 @@ class Factura
       @total =  @subTotal+@impuesto - @descuento
       "#{@total}"
     end
+    
     def getEstado()
         "#{@estado}"
     end
@@ -114,10 +115,6 @@ class Factura
     def getDescuentoMonto()
         "#{@descuentoMonto}"   
     end
-
-
-    
-
 
 
 end
