@@ -14,9 +14,8 @@ class Factura
 
 end
 
-puts "Total : "
 
 factura = Factura.new(ARGV[0],ARGV[1])
 
 
-puts "Total : " + factura.calculoTotal()
+puts "# #{ARGV[0]} * $#{ARGV[1]} = $" + factura.calculoTotal()
