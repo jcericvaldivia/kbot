@@ -14,6 +14,12 @@ class Factura
      @impuesto = @cantidad * @precioUnitario * 0.0825
      "#{@impuesto}"
     end
+    
+    def calculoDescuento()
+        @descuento = (@subTotal + @impuesto) * 0
+        "#{@descuento}"
+    end
+
     def calculoTotal()
       @total =  @subTotal+@impuesto
       "#{@total}"
