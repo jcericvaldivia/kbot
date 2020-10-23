@@ -1,17 +1,22 @@
-puts 10*5
 
 class Factura
     
-    def calculoTotal(cantidad, precioUnitario)
-        total = cantidad * precioUnitario
+    def initialize(cantidad , precioUnitario)
+
+       @cantidad = cantidad.to_i
+       @precioUnitario =  precioUnitario.to_i
+    end
+    def calculoTotal()
+        total = @cantidad * @precioUnitario
+        "#{total}"
     end 
 
 
 end
 
-puts "hola, mundo"
+puts "Total : "
+
+factura = Factura.new(ARGV[0],ARGV[1])
 
 
-
-cantidad = ARGV[0]
-precioUnitario = ARGV[1]
+puts "Total : " + factura.calculoTotal()
