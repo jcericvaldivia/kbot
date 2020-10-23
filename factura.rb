@@ -5,24 +5,24 @@ class MapaImpuestoEstado
         @NV = 0.08
         @TX = 0.0625
         @AL = 0.04
-        @CA = 0.0685
+        @CA = 0.0825
         
         
      end
 
-     def getUT
+     def getUT()
         "#{@UT}"
      end
-     def getNV
+     def getNV()
         "#{@NV}"
      end
-     def getTX
+     def getTX()
         "#{@TX}"
      end
-     def getAL
+     def getAL()
         "#{@AL}"
      end
-     def getCA
+     def getCA()
         "#{@CA}"
      end
 
@@ -41,10 +41,15 @@ class Factura
        @subTotal = @cantidad * @precioUnitario
        "#{@subTotal}"
     end 
-    def calculoImpuesto()
-        hola={"es"=> 'Hola', "en"=> 'Hello'}[@idioma]
-     @impuestoEstado = {"UT"=>  @mapImpuestoEstado.getUT, "NV"=> @mapImpuestoEstado.getNV, "TX"=> @mapImpuestoEstado.getTX, "AL"=> @mapImpuestoEstado.getAL, "CA"=> @mapImpuestoEstado.getCA}[@estado]   
-     @impuesto = @cantidad * @precioUnitario * 0.0825
+    def obtenerImpuestoEstado()
+        @impuestoEstado = {"UT"=>  @mapImpuestoEstado.getUT(), "NV"=> @mapImpuestoEstado.getNV(), "TX"=> @mapImpuestoEstado.getTX(), "AL"=> @mapImpuestoEstado.getAL(), "CA"=> @mapImpuestoEstado.getCA()}[@estado]
+        "#{@impuestoEstado}"
+    end
+
+    def calculoImpuesto()     
+     
+     @impuesto =  @subTotal *  @impuestoEstado.to_f
+     
      "#{@impuesto}"
     end
     
@@ -54,12 +59,19 @@ class Factura
     end
 
     def calculoTotal()
-      @total =  @subTotal+@impuesto
+      @total =  @subTotal+@impuesto - @descuento
       "#{@total}"
     end
     def getEstado()
         "#{@estado}"
     end
+    def getImpuestoEstadoImpresion()
+        obtenerImpuestoEstado()
+       impuestoEstadoImpresion = @impuestoEstado
+       
+       "#{impuestoEstadoImpresion}"
+    end
+
     
 
 
@@ -70,6 +82,6 @@ end
 factura = Factura.new(ARGV[0],ARGV[1], ARGV[2])
 
 puts "# #{ARGV[0]} * $#{ARGV[1]} = $" + factura.calculoSubTotal()
-puts "#{factura.getEstado}(%8.25) = $"+factura.calculoImpuesto()
+puts "#{factura.getEstado}(%#{factura.getImpuestoEstadoImpresion}) = $"+factura.calculoImpuesto()
 puts "DTO(%0) = $"+factura.calculoDescuento()
 puts "Total = $"+factura.calculoTotal()
