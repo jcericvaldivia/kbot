@@ -107,7 +107,7 @@ class Factura
     end
     def getImpuestoEstadoImpresion()
         obtenerImpuestoEstado()
-       impuestoEstadoImpresion = @impuestoEstado
+       impuestoEstadoImpresion = @impuestoEstado.to_f * 100
        
        "#{impuestoEstadoImpresion}"
     end
